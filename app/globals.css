@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff8ef;
+  --foreground: #1f2937;
+  --surface: rgba(255, 255, 255, 0.84);
+  --surface-strong: #fffdf9;
+  --border: rgba(148, 163, 184, 0.2);
+  --shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-mono: "DIN Alternate", "Arial Narrow", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  background-image:
+    radial-gradient(circle at top left, rgba(251, 146, 60, 0.24), transparent 30%),
+    radial-gradient(circle at top right, rgba(251, 191, 36, 0.18), transparent 24%),
+    linear-gradient(180deg, #fff8ef 0%, #fffdf8 45%, #f7f7f6 100%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.todo-panel {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(255, 255, 255, 0.86));
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+}
+
+.hero-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #c2410c;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: "Arial Narrow", "Avenir Next Condensed", "Avenir Next", sans-serif;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.hero-copy {
+  max-width: 38rem;
+  margin: 16px 0 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(251, 146, 60, 0.18);
+}
+
+.stat-card span {
+  display: block;
+  color: #78716c;
+  font-size: 0.85rem;
+}
+
+.stat-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.composer,
+.toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.composer {
+  margin-top: 32px;
+}
+
+.toolbar {
+  justify-content: space-between;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.todo-list {
+  display: grid;
+  gap: 14px;
+}
+
+.todo-card {
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  border-radius: 24px !important;
+  background: var(--surface-strong) !important;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.05) !important;
+}
+
+.empty-state {
+  padding: 44px 12px;
+  border: 1px dashed rgba(148, 163, 184, 0.4);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+@media (max-width: 768px) {
+  .page-shell {
+    padding: 20px 14px;
+  }
+
+  .todo-panel {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .hero-row {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .composer,
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 540px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
